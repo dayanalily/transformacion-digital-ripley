@@ -1,0 +1,2 @@
+PORT=4005
+MONGO_URL=mongodb+srv://root:uS7mAGt9sRrcCDEA@ecomercedb.kvz1m.mongodb.net/ecomerce?retryWrites=true&w=majority
