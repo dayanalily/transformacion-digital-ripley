@@ -142,6 +142,7 @@ export class AddresseeController {
     await this.addresseeRepository.replaceById(id, addressee);
   }
 
+
   @authenticate.skip()
   @del('/addressees/{id}')
   @response(204, {
