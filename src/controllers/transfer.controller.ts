@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ export class TransferController {
     public transferRepository: TransferRepository,
   ) { }
 
+  @authenticate.skip()
   @post('/transfers')
   @response(200, {
     description: 'Transfer model instance',
@@ -41,6 +43,7 @@ export class TransferController {
     return this.transferRepository.create(transfer);
   }
 
+  @authenticate.skip()
   @get('/transfers/count')
   @response(200, {
     description: 'Transfer model count',
@@ -51,7 +54,7 @@ export class TransferController {
   ): Promise<Count> {
     return this.transferRepository.count(where);
   }
-
+  @authenticate.skip()
   @get('/transfers')
   @response(200, {
     description: 'Array of Transfer model instances',
@@ -69,7 +72,7 @@ export class TransferController {
   ): Promise<Transfer[]> {
     return this.transferRepository.find(filter);
   }
-
+  @authenticate.skip()
   @patch('/transfers')
   @response(200, {
     description: 'Transfer PATCH success count',
@@ -89,6 +92,7 @@ export class TransferController {
     return this.transferRepository.updateAll(transfer, where);
   }
 
+  @authenticate.skip()
   @get('/transfers/{id}')
   @response(200, {
     description: 'Transfer model instance',
@@ -104,7 +108,7 @@ export class TransferController {
   ): Promise<Transfer> {
     return this.transferRepository.findById(id, filter);
   }
-
+  @authenticate.skip()
   @patch('/transfers/{id}')
   @response(204, {
     description: 'Transfer PATCH success',
@@ -122,7 +126,7 @@ export class TransferController {
   ): Promise<void> {
     await this.transferRepository.updateById(id, transfer);
   }
-
+  @authenticate.skip()
   @put('/transfers/{id}')
   @response(204, {
     description: 'Transfer PUT success',
@@ -133,7 +137,7 @@ export class TransferController {
   ): Promise<void> {
     await this.transferRepository.replaceById(id, transfer);
   }
-
+  @authenticate.skip()
   @del('/transfers/{id}')
   @response(204, {
     description: 'Transfer DELETE success',

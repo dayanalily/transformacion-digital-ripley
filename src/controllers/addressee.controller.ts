@@ -1,3 +1,4 @@
+import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -20,6 +21,7 @@ export class AddresseeController {
     public addresseeRepository: AddresseeRepository,
   ) { }
 
+  @authenticate.skip()
   @post('/addressees')
   @response(200, {
     description: 'Addressee model instance',
@@ -41,6 +43,7 @@ export class AddresseeController {
     return this.addresseeRepository.create(addressee);
   }
 
+  @authenticate.skip()
   @get('/addressees/count')
   @response(200, {
     description: 'Addressee model count',
@@ -52,6 +55,7 @@ export class AddresseeController {
     return this.addresseeRepository.count(where);
   }
 
+  @authenticate.skip()
   @get('/addressees')
   @response(200, {
     description: 'Array of Addressee model instances',
@@ -70,6 +74,7 @@ export class AddresseeController {
     return this.addresseeRepository.find(filter);
   }
 
+  @authenticate.skip()
   @patch('/addressees')
   @response(200, {
     description: 'Addressee PATCH success count',
@@ -89,6 +94,7 @@ export class AddresseeController {
     return this.addresseeRepository.updateAll(addressee, where);
   }
 
+  @authenticate.skip()
   @get('/addressees/{id}')
   @response(200, {
     description: 'Addressee model instance',
@@ -105,6 +111,7 @@ export class AddresseeController {
     return this.addresseeRepository.findById(id, filter);
   }
 
+  @authenticate.skip()
   @patch('/addressees/{id}')
   @response(204, {
     description: 'Addressee PATCH success',
@@ -123,6 +130,7 @@ export class AddresseeController {
     await this.addresseeRepository.updateById(id, addressee);
   }
 
+  @authenticate.skip()
   @put('/addressees/{id}')
   @response(204, {
     description: 'Addressee PUT success',
@@ -134,6 +142,7 @@ export class AddresseeController {
     await this.addresseeRepository.replaceById(id, addressee);
   }
 
+  @authenticate.skip()
   @del('/addressees/{id}')
   @response(204, {
     description: 'Addressee DELETE success',
