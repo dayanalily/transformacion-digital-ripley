@@ -1,6 +1,7 @@
-import {ApplicationConfig, ApiApplication} from './application';
+import {ApiApplication, ApplicationConfig} from './application';
 
 export * from './application';
+require('dotenv').config();
 
 export async function main(options: ApplicationConfig = {}) {
   const app = new ApiApplication(options);
