@@ -28,10 +28,10 @@ export class Addressee extends Entity {
   email: string;
 
   @property({
-    type: 'number',
+    type: 'string',
     required: true,
   })
-  phone: number;
+  phone: string;
 
   @property({
     type: 'string',
@@ -43,13 +43,13 @@ export class Addressee extends Entity {
     type: 'string',
     required: true,
   })
-  accountType: string;
+  typeAccount: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  acconuntNumber: string;
+  accountNumber: string;
 
   // Define well-known properties here
 
