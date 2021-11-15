@@ -12,7 +12,6 @@ import {
   getModelSchemaRef, HttpErrors, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
-import stream from 'stream';
 import {Users} from '../models';
 import {UsersRepository} from '../repositories';
 import {AuthService} from '../services/auth.service';
@@ -21,14 +20,14 @@ class Credentials {
   password: string
 }
 
-const AWS = require('aws-sdk');
-const {Duplex} = stream;
-function bufferToStream(buffer: any) {
-  const duplexStream = new Duplex();
-  duplexStream.push(buffer);
-  duplexStream.push(null);
-  return duplexStream;
-}
+// const AWS = require('aws-sdk');
+// const {Duplex} = stream;
+// function bufferToStream(buffer: any) {
+//   const duplexStream = new Duplex();
+//   duplexStream.push(buffer);
+//   duplexStream.push(null);
+//   return duplexStream;
+// }
 
 @authenticate('jwt')
 export class UsersController {
