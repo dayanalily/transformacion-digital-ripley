@@ -1,28 +1,32 @@
-import {authenticate} from '@loopback/authentication';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where
+  Where,
 } from '@loopback/repository';
 import {
-  del, get,
-  getModelSchemaRef, param, patch, post, put, requestBody,
-  response
+  post,
+  param,
+  get,
+  getModelSchemaRef,
+  patch,
+  put,
+  del,
+  requestBody,
+  response,
 } from '@loopback/rest';
-import {Addres} from '../models/addres.model';
-import {AddresRepository} from '../repositories/Addres.repository';
+import {Addres} from '../models';
+import {AddresRepository} from '../repositories';
 
 export class AddresController {
   constructor(
     @repository(AddresRepository)
-    public AddresRepository: AddresRepository,
-  ) { }
+    public addresRepository : AddresRepository,
+  ) {}
 
-  @authenticate.skip()
-  @post('/Address')
+  @post('/addres')
   @response(200, {
     description: 'Addres model instance',
     content: {'application/json': {schema: getModelSchemaRef(Addres)}},
@@ -33,18 +37,17 @@ export class AddresController {
         'application/json': {
           schema: getModelSchemaRef(Addres, {
             title: 'NewAddres',
-
+            exclude: ['id'],
           }),
         },
       },
     })
-    Addres: Addres,
+    addres: Omit<Addres, 'id'>,
   ): Promise<Addres> {
-    return this.AddresRepository.create(Addres);
+    return this.addresRepository.create(addres);
   }
 
-  @authenticate.skip()
-  @get('/Address/count')
+  @get('/addres/count')
   @response(200, {
     description: 'Addres model count',
     content: {'application/json': {schema: CountSchema}},
@@ -52,11 +55,10 @@ export class AddresController {
   async count(
     @param.where(Addres) where?: Where<Addres>,
   ): Promise<Count> {
-    return this.AddresRepository.count(where);
+    return this.addresRepository.count(where);
   }
 
-  @authenticate.skip()
-  @get('/Address')
+  @get('/addres')
   @response(200, {
     description: 'Array of Addres model instances',
     content: {
@@ -71,11 +73,10 @@ export class AddresController {
   async find(
     @param.filter(Addres) filter?: Filter<Addres>,
   ): Promise<Addres[]> {
-    return this.AddresRepository.find(filter);
+    return this.addresRepository.find(filter);
   }
 
-  @authenticate.skip()
-  @patch('/Address')
+  @patch('/addres')
   @response(200, {
     description: 'Addres PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -88,14 +89,13 @@ export class AddresController {
         },
       },
     })
-    Addres: Addres,
+    addres: Addres,
     @param.where(Addres) where?: Where<Addres>,
   ): Promise<Count> {
-    return this.AddresRepository.updateAll(Addres, where);
+    return this.addresRepository.updateAll(addres, where);
   }
 
-  @authenticate.skip()
-  @get('/Address/{id}')
+  @get('/addres/{id}')
   @response(200, {
     description: 'Addres model instance',
     content: {
@@ -108,11 +108,10 @@ export class AddresController {
     @param.path.string('id') id: string,
     @param.filter(Addres, {exclude: 'where'}) filter?: FilterExcludingWhere<Addres>
   ): Promise<Addres> {
-    return this.AddresRepository.findById(id, filter);
+    return this.addresRepository.findById(id, filter);
   }
 
-  @authenticate.skip()
-  @patch('/Address/{id}')
+  @patch('/addres/{id}')
   @response(204, {
     description: 'Addres PATCH success',
   })
@@ -125,30 +124,27 @@ export class AddresController {
         },
       },
     })
-    Addres: Addres,
+    addres: Addres,
   ): Promise<void> {
-    await this.AddresRepository.updateById(id, Addres);
+    await this.addresRepository.updateById(id, addres);
   }
 
-  @authenticate.skip()
-  @put('/Address/{id}')
+  @put('/addres/{id}')
   @response(204, {
     description: 'Addres PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() Addres: Addres,
+    @requestBody() addres: Addres,
   ): Promise<void> {
-    await this.AddresRepository.replaceById(id, Addres);
+    await this.addresRepository.replaceById(id, addres);
   }
 
-
-  @authenticate.skip()
-  @del('/Address/{id}')
+  @del('/addres/{id}')
   @response(204, {
     description: 'Addres DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.AddresRepository.deleteById(id);
+    await this.addresRepository.deleteById(id);
   }
 }
